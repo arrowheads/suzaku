@@ -36,4 +36,4 @@ echo "Initializing eudev."
 	/sbin/udevadm trigger --action=add --type=subsystems
 	/sbin/udevadm trigger --action=add --type=devices
 
-/sbin/agetty -8 -s 38400 tty1 linux &
+/sbin/agetty -J -8 -s 38400 tty1 linux &
