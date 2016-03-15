@@ -1,16 +1,19 @@
 #!/bin/sh
 # This script is called by sinit on boot.
+# It performs one time tasks that don't require configuration
+# and are the bare minimum to get the system up and running.
+# This should never fail.
 
 PATH=/bin:/sbin:/usr/bin:/usr/sbin
 
-echo "System is starting up."
 echo
-echo "suzaku: stage 1"
+echo "suzaku: System is starting up."
 echo
 
 echo "Mounting API filesystem."
 	mkdir -p /dev/pts
 	mkdir /dev/shm
+
 	mountpoint -q /proc    || mount -t proc proc /proc -o nosuid,noexec,nodev
 	mountpoint -q /sys     || mount -t sysfs sys /sys -o nosuid,noexec,nodev
 	mountpoint -q /var/run || mount -t tmpfs run /run -o mode=0775,nosuid,nodev
@@ -35,5 +38,11 @@ echo "Initializing eudev."
 
 echo "Mounting swap."
 	swapon -a
+
+echo "Setting up loopback device."
+	ip link set up dev lo
+
+echo "Setting up system clock."
+	hwclock --systz
 
 /sbin/agetty -J -8 -s 38400 tty1 linux &
