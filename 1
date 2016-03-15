@@ -8,18 +8,21 @@ echo
 echo "suzaku: stage 1"
 echo
 
-echo "Checking filesystems."
-	fsck -A -T -C -a || echo "Filesystem check failed. Panic."
-
 echo "Mounting API filesystem."
-	mkdir -p /dev/{pts,shm}
+	mkdir -p /dev/pts
+	mkdir /dev/shm
 	mountpoint -q /proc    || mount -t proc proc /proc -o nosuid,noexec,nodev
 	mountpoint -q /sys     || mount -t sysfs sys /sys -o nosuid,noexec,nodev
 	mountpoint -q /var/run || mount -t tmpfs run /run -o mode=0775,nosuid,nodev
 	mountpoint -q /dev     || mount -t devtmpfs dev /dev -o mode=0755,nosuid
 	mountpoint -q /dev/pts || mount -t devpts devpts /dev/pts -o mode=0620,gid=5,nosuid,noexec
 	mountpoint -q /dev/shm || mount -t tmpfs shm /dev/shm -o mode=1777,nosuid,nodev
+
+echo "Mounting swap."
 	swapon -a
+
+echo "Checking filesystems."
+	fsck -A -T -C -a || echo "Filesystem check failed. Panic."
 
 echo "Mounting tmpfs."
 	mount -t tmpfs tmpfs /tmp -o mode=1777,nosuid,nodev
