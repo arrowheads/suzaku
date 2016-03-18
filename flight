@@ -23,13 +23,13 @@ echo "Setting keyboard map."
 	loadkeys -q $KEYBOARD
 
 echo "Starting process supervisor."
-	mkdir -p /run/pavo
+	mkdir -p /run/suzaku
 	for s in $SERVICES; do
-		ln -s /etc/suzaku/svc.d/$s /run/pavo/$s
-		echo -n "pavo: Linking: "
+		ln -s /etc/suzaku/svc.d/$s /run/suzaku/$s
+		echo -n "suzaku: Linking: "
 		echo -n "$s "
 		echo
 	done
 
-	echo "pavo: Starting all linked services."
-	s6-svscan /run/pavo
+	echo "suzaku: Starting all linked services."
+	s6-svscan /run/suzaku
