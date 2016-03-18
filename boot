@@ -11,13 +11,12 @@ echo "suzaku: System is starting up."
 echo
 
 echo "Mounting API filesystem."
-	mkdir -p /dev/pts
-	mkdir /dev/shm
-
 	mountpoint -q /proc    || mount -t proc proc /proc -o nosuid,noexec,nodev
 	mountpoint -q /sys     || mount -t sysfs sys /sys -o nosuid,noexec,nodev
 	mountpoint -q /var/run || mount -t tmpfs run /run -o mode=0775,nosuid,nodev
 	mountpoint -q /dev     || mount -t devtmpfs dev /dev -o mode=0755,nosuid
+
+	mkdir /dev/pts /dev/shm
 	mountpoint -q /dev/pts || mount -t devpts devpts /dev/pts -o mode=0620,gid=5,nosuid,noexec
 	mountpoint -q /dev/shm || mount -t tmpfs shm /dev/shm -o mode=1777,nosuid,nodev
 
@@ -32,17 +31,11 @@ echo "Mounting partitions."
 	mount -o remount,rw /
 
 echo "Initializing eudev."
-	/sbin/udevd --daemon
-	/sbin/udevadm trigger --action=add --type=subsystems
-	/sbin/udevadm trigger --action=add --type=devices
-
-echo "Mounting swap."
-	swapon -a
-
-echo "Setting up loopback device."
-	ip link set up dev lo
+	udevd --daemon
+	udevadm trigger --action=add --type=subsystems
+	udevadm trigger --action=add --type=devices
 
 echo "Setting up system clock."
 	hwclock --systz
 
-/sbin/agetty -J -8 -s 38400 tty1 linux &
+agetty -J -8 -s 38400 tty1 linux &
