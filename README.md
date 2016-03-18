@@ -1,6 +1,6 @@
 #Suzaku
 
-A clean init system using s6 as the process manager.
+A clean init system using s6 as the process supervisor.
 
 ### Why?
 I wasn't happy with other init solutions at the time I wrote this,
