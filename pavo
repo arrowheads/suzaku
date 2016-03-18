@@ -1,0 +1,22 @@
+#!/bin/sh
+# Wrapper script for suzaku.
+
+if [ $(id -u) != "0" ]; then
+   echo "pavo must be run as root."
+   exit 1
+fi
+
+case "$1" in
+	shutdown)
+		/etc/suzaku/land
+		poweroff -f
+		;;
+	reboot)
+		/etc/suzaku/land
+		reboot -f
+		;;
+	*)
+		echo "Usage: pavo [shutdown|reboot]"
+		exit 1
+		;;
+esac

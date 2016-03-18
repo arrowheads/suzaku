@@ -1,0 +1,35 @@
+#!/bin/sh
+# This script is called when the booting process is completed.
+# It starts the process supervisor and contains commands that
+# that require user configuration in suzaku.conf.
+
+PATH=/bin:/sbin:/usr/bin:/usr/sbin
+. /etc/suzaku.conf
+
+echo
+echo "suzaku: Entering flight stage."
+echo
+
+echo "Mounting swap."
+	swapon -a
+
+echo "Setting up loopback device."
+	ip link set up dev lo
+
+echo "Setting hostname."
+	echo $HOSTNAME >| /proc/sys/kernel/hostname
+
+echo "Setting keyboard map."
+	loadkeys -q $KEYBOARD
+
+echo "Starting process supervisor."
+	mkdir -p /run/pavo
+	for s in $SERVICES; do
+		ln -s /etc/suzaku/svc.d/$s /run/pavo/$s
+		echo -n "pavo: Linking: "
+		echo -n "$s "
+		echo
+	done
+
+	echo "pavo: Starting all linked services."
+	s6-svscan /run/pavo

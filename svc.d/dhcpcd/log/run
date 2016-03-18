@@ -1,0 +1,2 @@
+#!/bin/sh
+exec s6-log t s1000000 n20 /var/log/dhcpcd

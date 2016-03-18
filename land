@@ -1,0 +1,33 @@
+#!/bin/sh
+# This script is called when a shutdown is requested.
+# It kills the process supervisor and does all the tasks 
+# necessary for a clean shutdown.
+
+PATH=/bin:/sbin:/usr/bin:/usr/sbin
+. /etc/suzaku.conf
+
+echo
+echo "suzaku: Landing..."
+echo
+
+echo "Unmounting swap."
+	swapoff -a
+
+echo "Stopping services."
+	s6-svscanctl -an /run/pavo
+
+echo "Shutting down eudev."
+	killall udevd
+
+echo "Sending all processes the TERM signal."
+	killall5 -TERM
+	sleep 3
+
+echo "Sending all processes the KILL signal."
+	killall5 -KILL
+
+echo "Unmounting partitions."
+	umount -a -r
+
+echo "Remounting root read-only."
+	mount -o remount,ro /
