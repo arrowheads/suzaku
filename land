@@ -13,21 +13,22 @@ echo
 echo "Unmounting swap."
 	swapoff -a
 
-echo "Stopping services."
-	s6-svscanctl -an /run/pavo
-
 echo "Shutting down eudev."
 	killall udevd
 
 echo "Sending all processes the TERM signal."
-	killall5 -TERM
+	/sbin/toybox killall5 -TERM
 	sleep 3
 
 echo "Sending all processes the KILL signal."
-	killall5 -KILL
+	/sbin/toybox killall5 -KILL
+
+echo "Stopping services."
+	s6-svscanctl -an /run/pavo
 
 echo "Unmounting partitions."
-	umount -a -r
+	umount /tmp
+	umount -a -r -t nosysfs,noproc,nodevtmpfs,notmpfs
 
 echo "Remounting root read-only."
 	mount -o remount,ro /
