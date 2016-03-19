@@ -27,7 +27,7 @@ echo "Starting process supervisor."
 
 	echo -n "Copying: "
 	for service in $SERVICES; do
-		cp /etc/suzaku/services/$service /run/suzaku/$service
+		cp -r /etc/suzaku/services/$service /run/suzaku/$service
 		echo -n "$service "
 	done
 	echo
