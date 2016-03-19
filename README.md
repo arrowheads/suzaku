@@ -1,6 +1,6 @@
 #Suzaku
 
-A clean init system using s6 as the process manager.
+A clean init system using s6 as the process supervisor.
 
 ### Why?
 I wasn't happy with other init solutions at the time I wrote this,
@@ -16,6 +16,8 @@ So I decided to write my own.
 ### Instructions:
 For now, Suzaku is still undergoing bug testing, but you can 
 install it and use it!
+
+Dependencies: toybox, s6, util-linux (for now, I'm looking to replace this with toybox)
 
 The default setup is this:
 
