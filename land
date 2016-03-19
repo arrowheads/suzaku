@@ -16,15 +16,15 @@ echo "Unmounting swap."
 echo "Shutting down eudev."
 	killall udevd
 
+echo "Stopping services."
+	s6-svscanctl -an /run/suzaku
+
 echo "Sending all processes the TERM signal."
 	/sbin/toybox killall5 -TERM
 	sleep 3
 
 echo "Sending all processes the KILL signal."
 	/sbin/toybox killall5 -KILL
-
-echo "Stopping services."
-	s6-svscanctl -an /run/pavo
 
 echo "Unmounting partitions."
 	umount /tmp
