@@ -27,7 +27,7 @@ echo "Starting process supervisor."
 
 	echo -n "Linking: "
 	for service in $SERVICES; do
-		ln -s /etc/suzaku/service/$service /run/suzaku/$service
+		ln -s /etc/suzaku/services/$service /run/suzaku/$service
 		echo -n "$service "
 	done
 	echo
