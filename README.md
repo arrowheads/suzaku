@@ -17,6 +17,8 @@ So I decided to write my own.
 For now, Suzaku is still undergoing bug testing, but you can 
 install it and use it!
 
+Dependencies: toybox, s6, util-linux (for now, I'm looking to replace this with toybox)
+
 The default setup is this:
 
 1. Install `fly`, `flight`, `land` and `svc.d` to `/etc/suzaku`.
