@@ -1,2 +1,2 @@
 #!/bin/sh
-exec mpdscribble --no-daemon
+exec mpdscribble --no-daemon --conf /etc/mpdscribble.conf
