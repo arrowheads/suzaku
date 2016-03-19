@@ -25,12 +25,12 @@ echo "Setting keyboard map."
 echo "Starting process supervisor."
 	mkdir -p /run/suzaku
 
-	echo -n "Linking: "
+	echo -n "Copying: "
 	for service in $SERVICES; do
-		ln -s /etc/suzaku/services/$service /run/suzaku/$service
+		cp /etc/suzaku/services/$service /run/suzaku/$service
 		echo -n "$service "
 	done
 	echo
 
-	echo "Starting all linked services."
+	echo "Starting all copied services."
 	s6-svscan /run/suzaku
