@@ -19,7 +19,7 @@ install it and use it!
 
 The default setup is this:
 
-1. Install `fly`, `flight`, `land` and `svc.d` to `/etc/suzaku`.
+1. Copy `fly`, `flight`, `land` and `services` to `/etc/suzaku`.
 
 2. Install pavo as `/sbin/pavo`
  
