@@ -22,11 +22,8 @@ Dependencies: toybox, s6, util-linux (for now, I'm looking to replace this with 
 The default setup is this:
 
 1. Copy `fly`, `flight`, `land` and `services` to `/etc/suzaku`.
-
 2. Install pavo as `/sbin/pavo`
- 
 3. Compile sinit with the provided header. (`sinit.config.h`)
-
 4. Edit the config to your desire.
 
 ### Things to do
