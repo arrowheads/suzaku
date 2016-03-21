@@ -12,11 +12,24 @@ I wasn't happy with other init systems, So I decided to write my own.
 * Fast.
   * If you have dash installed, the boot times are very small.
 
-### Instructions:
+### Structure:
+At boot, sinit calls `fly`, which mounts the pseudo-filesystems, checks the filesystems,
+mounts those, starts eudev and syncs the system clock.
+
+When taking off is done, The system enters the `flight` stage. The script mounts swap, does some configuration,
+and starts s6, which starts the services you configured.
+
+When you want to shutdown, the system must `land`. This script kills the processes, 
+unmounts the partitions, and then shuts down the system or reboots based on what was requested to sinit.
+
+##### Why this naming?
+Because it's fun!
+
+### Installation:
 For now, Suzaku is still undergoing bug testing, but you can 
 install it and use it!
 
-Dependencies: toybox, s6, util-linux (for now, I'm looking to replace this with toybox)
+Dependencies: toybox, s6, eudev, util-linux (for now, I'm looking to replace this with toybox)
 
 The default setup is this:
 
