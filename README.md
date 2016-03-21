@@ -3,8 +3,7 @@
 A clean init system using s6 as the process supervisor.
 
 ### Why?
-I wasn't happy with other init solutions at the time I wrote this,
-So I decided to write my own.
+I wasn't happy with other init systems, So I decided to write my own.
 
 ### Features:
 
