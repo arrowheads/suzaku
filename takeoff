@@ -7,7 +7,7 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin
 
 echo
-echo "suzaku: Taking flight..."
+echo "suzaku: Taking off..."
 echo
 
 echo "Mounting pseudo-filesystems."
