@@ -13,8 +13,7 @@ I wasn't happy with other init systems, So I decided to write my own.
   * If you have dash installed, the boot times are very small.
 
 ### Structure:
-At boot, sinit calls `fly`, which mounts the pseudo-filesystems, checks the filesystems,
-mounts those, starts eudev and syncs the system clock.
+At boot, sinit calls `takeoff`, which mounts the pseudo-filesystems, checks the filesystems, mounts those, starts eudev and syncs the system clock.
 
 When taking off is done, The system enters the `flight` stage. The script mounts swap, does some configuration,
 and starts s6, which starts the services you configured.
@@ -33,7 +32,7 @@ Dependencies: toybox, s6, eudev, util-linux (for now, I'm looking to replace thi
 
 The default setup is this:
 
-1. Copy `fly`, `flight`, `land` and `services` to `/etc/suzaku`.
+1. Copy `takeoff`, `flight`, `land` and `services` to `/etc/suzaku`.
 2. Install pavo as `/sbin/pavo`
 3. Compile sinit with the provided header. (`sinit.config.h`)
 4. Edit the config to your desire.
