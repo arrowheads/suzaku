@@ -1,4 +1,4 @@
-#Suzaku
+# Suzaku
 
 A clean init system using s6 as the process supervisor.
 
